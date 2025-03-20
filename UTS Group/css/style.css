@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: peachpuff;
+    margin: 0;
+    padding: 0;
+}
+
+.top-div {
+    background-color: lightgoldenrodyellow;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-div h1 {
+    color: black;
+}
+
+.main-container {
+    display: flex;
+    height: 80vh;
+}
+
+.bottom-div {
+    width: 75%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.status-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.locations {
+    position: relative;
+    height: 100%;
+}
+
+.circle-button {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: skyblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.separator {
+    width: 1px;
+    background-color: black;
+    height: 80vh;
+}
+
+.side-div {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px;
+    min-width: 200px;
+}
+
+.move-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+
+.horizontal-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+}
+
+.move-buttons .circle-button {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: skyblue;
+    color: white;
+    border: 1px solid skyblue;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.player {
+    width: 50px;
+    height: 50px;
+    background-color: hotpink;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    cursor: grab;
+}
