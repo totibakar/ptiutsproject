@@ -52,17 +52,29 @@ document.addEventListener("DOMContentLoaded", function () {
         event.stopPropagation();
     });
 
-    // Close dropdown when clicking outside
-    document.addEventListener("click", function (event) {
-        if (!menuBtn.contains(event.target) && !dropdown.contains(event.target)) {
-            dropdown.classList.remove("show");
-        }
-    });
-
     // Optional: Close on ESC key press
     document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
             dropdown.classList.remove("show");
         }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const readMeBtn = document.getElementById("readMeBtn");
+    const rulesBox = document.getElementById("rulesBox");
+    const closeRulesBtn = document.querySelector(".close-btn");
+
+    readMeBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        rulesBox.classList.add("show"); // Show with animation
+    });
+
+    closeRulesBtn.addEventListener("click", function () {
+        // Add 'hide' class to start animation, then remove 'show' after animation
+        rulesBox.classList.add("hide");
+        setTimeout(() => {
+            rulesBox.classList.remove("show", "hide");
+        }, 300); // Matches CSS transition time
     });
 });

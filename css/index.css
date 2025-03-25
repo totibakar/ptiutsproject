@@ -89,6 +89,63 @@ body {
     transform: translateY(0);
 }
 
+/* Game Rules Box */
+.rules-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background: rgba(151, 113, 64); /* Transparent effect */
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    z-index: 1000;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -60%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.rules-box.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+}
+
+.rules-box.hide {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.rules-box ul {
+    list-style-type: none;
+}
+
+.rules-box li {
+    margin: 10px 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
 /* Related to Character*/
 .character-wrapper {
     display: flex;
@@ -169,7 +226,7 @@ input {
     width: 200px;
     border: 3px solid black;
     border-radius: 5px;
-    background-color: rgb(87, 87, 87);
+    background-color: rgb(193, 193, 193);
 
 }
 
