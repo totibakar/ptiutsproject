@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Selection</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="menu-container">
+            <button class="menu-btn">☰</button>
+            <div class="dropdown">
+                <a href="index.html">Menu</a>
+                <a href="external/game rules.html">Read me</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image background -->
+    <div class="image-container">
+        <img src="assets/test.png">
+    </div>
+
+    <!-- Character Selection Slider and Input/start button-->
+     <div class="character-wrapper">
+        <div class="character-selection">
+            <button id="prevBtn">❮</button>
+            <div class="slider-container">
+                <div class="slider">
+                    <img src="assets/Yoshiki.png" class="character">
+                    <img src="assets/Hikaru.png" class="character">
+                    <img src="character3.png" class="character">
+                    <img src="character4.png" class="character">
+                    <img src="character5.png" class="character">
+                </div>
+            </div>
+            <button id="nextBtn">❯</button>
+        </div>
+
+        <div class="input-container">
+        <label for="playerName" class="input-label">What is your name?</label>
+        <input type="text" id="playerName">
+        <button id="startBtn"><b>Start Exploring</b></button>
+    </div>
+    </div>
+
+
+    <script src="js/index.js"></script>
+</body>
+</html>
