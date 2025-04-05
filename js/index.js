@@ -146,3 +146,40 @@ function toggleLore(rowNumber) {
         }, 10); // Biar transisi fade jalan
     }, 300); // Tunggu fade out selesai
 }
+
+function updateClock() {
+    const now = new Date();
+  
+    // Format time
+    const time = now.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+    });
+  
+    // Get timezone offset in minutes
+    const offsetMinutes = -now.getTimezoneOffset(); // JS offset is negative behind UTC
+    const offsetHours = offsetMinutes / 60;
+    const gmtOffset = `GMT${offsetHours >= 0 ? '+' : ''}${offsetHours}`;
+  
+    // Map GMT offset to abbreviation
+    const timeZoneAbbr = gmtOffsetAbbreviationMap[gmtOffset] || gmtOffset;
+  
+    // Update DOM
+    const clock = document.getElementById('clock');
+    clock.textContent = `${time} ${timeZoneAbbr}`;
+  }
+  
+  // Mapping GMT offset → Timezone abbreviation
+  const gmtOffsetAbbreviationMap = {
+    'GMT+9': 'JST',
+    'GMT+7': 'WIB',
+    'GMT+8': 'WITA',
+    'GMT+0': 'GMT',
+    // Extend as needed
+  };
+  
+  setInterval(updateClock, 1000);
+  updateClock();
+  
