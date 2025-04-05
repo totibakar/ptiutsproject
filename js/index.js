@@ -70,12 +70,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     readMeBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        rulesBox.classList.add("show"); // Show with animation
+    
+        if (loreBox.classList.contains("show")) {
+            loreBox.classList.add("hide");
+            setTimeout(() => {
+                loreBox.classList.remove("show", "hide");
+                rulesBox.classList.add("show");
+            }, 100);
+        } else {
+            rulesBox.classList.add("show");
+        }
     });
-
+    
     chrLoreBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        loreBox.classList.add("show"); // Show with animation
+    
+        if (rulesBox.classList.contains("show")) {
+            rulesBox.classList.add("hide");
+            setTimeout(() => {
+                rulesBox.classList.remove("show", "hide");
+                loreBox.classList.add("show");
+            }, 100);
+        } else {
+            loreBox.classList.add("show");
+        }
     });
 
     closeRulesBtn.addEventListener("click", function () {
@@ -108,3 +126,23 @@ window.addEventListener('load', () => {
     }, 7500); // 5s moveLine + 0.5s delay + 2s growLineCenter
 });
 
+function toggleLore(rowNumber) {
+    const loreContents = document.querySelectorAll('.lore-content');
+    const selectedLore = document.getElementById(`loreContent${rowNumber}`);
+
+    loreContents.forEach(content => {
+        if (content.classList.contains('show')) {
+            content.classList.remove('show');
+            setTimeout(() => {
+                content.style.display = 'none';
+            }, 300);
+        }
+    });
+
+    setTimeout(() => {
+        selectedLore.style.display = 'block';
+        setTimeout(() => {
+            selectedLore.classList.add('show');
+        }, 10); // Biar transisi fade jalan
+    }, 300); // Tunggu fade out selesai
+}
