@@ -497,7 +497,7 @@ button:hover {
     100% { width: 1200px; transform: translateX(0); opacity: 1; }
 }
 
-/* clocl */
+/* clock */
 #clock {
     position: fixed;
     bottom: 16px;
