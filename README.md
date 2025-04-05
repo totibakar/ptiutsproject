@@ -1,10 +1,10 @@
-Group members:
+Group members: <br/>
 • Tito Shafy
 • Muhamad Altha Rasjid
 • Pierre E.S Moningka
 • Dylan Wilson
 
-Gameplay rules: (temp)
+Gameplay rules: (temp)<br/>
 • 1 Menit di dalam game = 1 detik di dunia nyata.
 • Ada 6 status yang harus kamu lihat, yaitu: Makan, Minum, Tidur, Bermain, Olahraga, dan Belajar.
 • Jika salah satu dari status bar habis, maka akan ada konsekuensi yang akan didapatkan.
