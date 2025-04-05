@@ -146,6 +146,63 @@ body {
     color: red;
 }
 
+/* Character Lore Box */
+.Lore-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background: rgba(151, 113, 64); /* Transparent effect */
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    z-index: 1000;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -60%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.Lore-box.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+}
+
+.Lore-box.hide {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.Lore-box ul {
+    list-style-type: none;
+}
+
+.Lore-box li {
+    margin: 10px 0;
+}
+
+.closed-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+}
+
+.closed-btn:hover {
+    color: red;
+}
+
 /* Related to Character*/
 .character-wrapper {
     display: flex;
@@ -266,4 +323,101 @@ button:hover {
 #startBtn:hover {
     background-color: #B8A89E; /* Darker beige on hover */
     transform: scale(1.05);
+}
+
+/* Loading screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/*.loading-screen img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: blur(5px);
+} */
+
+.loading-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    /* z-index: 2; Di depan gambar */
+}
+
+.loading-line {
+    width: 50px;
+    height: 4px;
+    background-color: white;
+    position: relative;
+    margin: 0 auto;
+    opacity: 0;
+    animation: moveLine 5s ease-in-out 1;
+    /* z-index: 2; Di depan gambar */
+}
+
+.grow-line {
+    width: 0;
+    height: 4px;
+    background-color: white;
+    position: relative;
+    margin: 0 auto;
+    opacity: 0;
+    animation: growLineCenter 2s ease-in-out 1 forwards;
+    animation-delay: 5.5s;
+    /* z-index: 2; Di depan gambar */
+}
+
+/* moveLine Animation */
+@keyframes moveLine {
+    /* 1st Move: Right to Left */
+    0%   { transform: translateX(500px); width: 50px; opacity: 0; }
+    5%   { width: 100px; opacity: 1; }
+    10%  { width: 150px; }
+    15%  { width: 200px; }
+    20%  { transform: translateX(-500px); width: 250px; opacity: 0; }
+
+    /* 2nd Move: Left to Right */
+    25%  { transform: translateX(-500px); width: 50px; opacity: 0; }
+    30%  { width: 100px; opacity: 1; }
+    35%  { width: 150px; }
+    40%  { width: 200px; }
+    45%  { transform: translateX(500px); width: 250px; opacity: 0; }
+
+    /* 3rd Move: Right to Left */
+    50%  { transform: translateX(500px); width: 50px; opacity: 0; }
+    55%  { width: 100px; opacity: 1; }
+    60%  { width: 150px; }
+    65%  { width: 200px; }
+    70%  { transform: translateX(-500px); width: 250px; opacity: 0; }
+
+    /* 4th Move: Left to Right */
+    75%  { transform: translateX(-500px); width: 50px; opacity: 0; }
+    80%  { width: 100px; opacity: 1; }
+    85%  { width: 150px; }
+    90%  { width: 200px; }
+    95%  { transform: translateX(500px); width: 250px; opacity: 0; }
+
+    /* End */
+    100% { transform: translateX(500px); width: 50px; opacity: 0; }
+}
+
+/* growLineCenter Animation */
+@keyframes growLineCenter {
+    0% { width: 0; opacity: 1; }
+    50% { width: 1200px; opacity: 1; }
+    100% { width: 1200px; opacity: 1; }
 }

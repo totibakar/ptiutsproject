@@ -63,11 +63,19 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const readMeBtn = document.getElementById("readMeBtn");
     const rulesBox = document.getElementById("rulesBox");
+    const loreBox = document.getElementById("loreBox");
+    const chrLoreBtn = document.getElementById("chrLoreBtn");
     const closeRulesBtn = document.querySelector(".close-btn");
+    const closeLoreBtn = document.querySelector(".closed-btn");
 
     readMeBtn.addEventListener("click", function (event) {
         event.preventDefault();
         rulesBox.classList.add("show"); // Show with animation
+    });
+
+    chrLoreBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        loreBox.classList.add("show"); // Show with animation
     });
 
     closeRulesBtn.addEventListener("click", function () {
@@ -77,4 +85,26 @@ document.addEventListener("DOMContentLoaded", function () {
             rulesBox.classList.remove("show", "hide");
         }, 300); // Matches CSS transition time
     });
+
+    closeLoreBtn.addEventListener("click", function () {
+            // Add 'hide' class to start animation, then remove 'show' after animation
+            loreBox.classList.add("hide");
+            setTimeout(() => {
+                loreBox.classList.remove("show", "hide");
+            }, 300); // Matches CSS transition time
+        });
 });
+
+
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.querySelector('.loading-screen').style.opacity = '0';
+        document.querySelector('.loading-screen').style.transition = 'opacity 1s ease';
+
+        setTimeout(() => {
+            document.querySelector('.loading-screen').style.display = 'none';
+        }, 1000);
+    }, 7500); // 5s moveLine + 0.5s delay + 2s growLineCenter
+});
+
