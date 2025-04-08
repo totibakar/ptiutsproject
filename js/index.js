@@ -37,84 +37,54 @@ startBtn.addEventListener("click", function () {
     }
 });
 
+// Dropdown menu
 document.addEventListener("DOMContentLoaded", function () {
     const menuBtn = document.querySelector(".menu-btn");
     const dropdown = document.querySelector(".dropdown");
 
-    // Toggle dropdown when clicking the button
     menuBtn.addEventListener("click", function (event) {
-        event.stopPropagation(); // Prevents immediate closing
+        event.stopPropagation();
         dropdown.classList.toggle("show");
     });
 
-    // Prevent dropdown from closing when clicking inside
     dropdown.addEventListener("click", function (event) {
         event.stopPropagation();
     });
-
-    // Optional: Close on ESC key press
-    document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-            dropdown.classList.remove("show");
-        }
-    });
 });
 
+// Readme popup
 document.addEventListener("DOMContentLoaded", function () {
     const readMeBtn = document.getElementById("readMeBtn");
     const rulesBox = document.getElementById("rulesBox");
-    const loreBox = document.getElementById("loreBox");
-    const chrLoreBtn = document.getElementById("chrLoreBtn");
     const closeRulesBtn = document.querySelector(".close-btn");
-    const closeLoreBtn = document.querySelector(".closed-btn");
+
+    function closeRulesBox() {
+        rulesBox.classList.add("hide");
+        setTimeout(() => {
+            rulesBox.classList.remove("show", "hide");
+        }, 300);
+    }
 
     readMeBtn.addEventListener("click", function (event) {
         event.preventDefault();
-    
-        if (loreBox.classList.contains("show")) {
-            loreBox.classList.add("hide");
-            setTimeout(() => {
-                loreBox.classList.remove("show", "hide");
-                rulesBox.classList.add("show");
-            }, 100);
+
+        if (rulesBox.classList.contains("show")) {
+            closeRulesBox();
         } else {
             rulesBox.classList.add("show");
         }
     });
-    
-    chrLoreBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-    
-        if (rulesBox.classList.contains("show")) {
-            rulesBox.classList.add("hide");
-            setTimeout(() => {
-                rulesBox.classList.remove("show", "hide");
-                loreBox.classList.add("show");
-            }, 100);
-        } else {
-            loreBox.classList.add("show");
+
+    closeRulesBtn.addEventListener("click", closeRulesBox);
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && rulesBox.classList.contains("show")) {
+            closeRulesBox();
         }
     });
-
-    closeRulesBtn.addEventListener("click", function () {
-        // Add 'hide' class to start animation, then remove 'show' after animation
-        rulesBox.classList.add("hide");
-        setTimeout(() => {
-            rulesBox.classList.remove("show", "hide");
-        }, 300); // Matches CSS transition time
-    });
-
-    closeLoreBtn.addEventListener("click", function () {
-            // Add 'hide' class to start animation, then remove 'show' after animation
-            loreBox.classList.add("hide");
-            setTimeout(() => {
-                loreBox.classList.remove("show", "hide");
-            }, 300); // Matches CSS transition time
-        });
 });
 
-
-
+// Intro
 window.addEventListener('load', () => {
     setTimeout(() => {
         document.querySelector('.loading-screen').style.opacity = '0';
@@ -126,27 +96,7 @@ window.addEventListener('load', () => {
     }, 7500); // 5s moveLine + 0.5s delay + 2s growLineCenter
 });
 
-function toggleLore(rowNumber) {
-    const loreContents = document.querySelectorAll('.lore-content');
-    const selectedLore = document.getElementById(`loreContent${rowNumber}`);
-
-    loreContents.forEach(content => {
-        if (content.classList.contains('show')) {
-            content.classList.remove('show');
-            setTimeout(() => {
-                content.style.display = 'none';
-            }, 300);
-        }
-    });
-
-    setTimeout(() => {
-        selectedLore.style.display = 'block';
-        setTimeout(() => {
-            selectedLore.classList.add('show');
-        }, 10); // Biar transisi fade jalan
-    }, 300); // Tunggu fade out selesai
-}
-
+// Clock
 function updateClock() {
     const now = new Date();
   
@@ -159,7 +109,7 @@ function updateClock() {
     });
   
     // Get timezone offset in minutes
-    const offsetMinutes = -now.getTimezoneOffset(); // JS offset is negative behind UTC
+    const offsetMinutes = -now.getTimezoneOffset();
     const offsetHours = offsetMinutes / 60;
     const gmtOffset = `GMT${offsetHours >= 0 ? '+' : ''}${offsetHours}`;
   
@@ -171,13 +121,11 @@ function updateClock() {
     clock.textContent = `${time} ${timeZoneAbbr}`;
   }
   
-  // Mapping GMT offset → Timezone abbreviation
   const gmtOffsetAbbreviationMap = {
     'GMT+9': 'JST',
     'GMT+7': 'WIB',
     'GMT+8': 'WITA',
     'GMT+0': 'GMT',
-    // Extend as needed
   };
   
   setInterval(updateClock, 1000);

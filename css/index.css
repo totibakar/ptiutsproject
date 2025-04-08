@@ -22,17 +22,17 @@ body {
 
 /* Image background */
 .image-container {
-    position: fixed; /* Tetap di latar belakang */
+    position: fixed;
     left: 0;
     width: 100vw; /* Lebar penuh */
-    height: 100vh; /* Tinggi penuh */
-    z-index: -1; /* Di belakang elemen lain */
+    height: 100vh; 
+    z-index: -1;
 }
 
 .image-container img {
     width: 100%;
     height: 107%;
-    object-fit: cover; /* Pastikan gambar memenuhi area */
+    object-fit: cover;
     filter: blur(5px);
 }
 
@@ -40,8 +40,8 @@ body {
 .menu-container {
     position: fixed;
     display: inline-block;
-    bottom: 10px; /* Adjust this for spacing */
-    left: 2px; /* Adjust this for spacing */
+    bottom: 10px;
+    left: 2px;
     z-index: 1000;
 }
 
@@ -58,15 +58,15 @@ body {
 .dropdown {
     display: none;
     position: absolute;
-    bottom: 100%; /* Position it above the button */
+    bottom: 100%;
     left: 0;
     background-color: rgba(151, 113, 64);
     border: 1px solid black;
     min-width: 120px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    opacity: 0;  /* Hide it visually */
-    transform: translateY(10px);  /* Move up slightly */
+    opacity: 0;
+    transform: translateY(10px);
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
@@ -96,7 +96,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
-    background: rgba(151, 113, 64); /* Transparent effect */
+    background: rgba(151, 113, 64);
     padding: 20px;
     border: 2px solid black;
     border-radius: 10px;
@@ -146,139 +146,14 @@ body {
     color: red;
 }
 
-/* Character Lore Box */
-.Lore-box {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    width: 50%;
-    max-height: 80vh; /* Limit height relative to screen */
-    overflow-y: auto;  /* Add scroll if content exceeds max height */
-    background: rgba(151, 113, 64);
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    text-align: left;
-    z-index: 1000;
-
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.lore-content {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center; /* biar teks juga rata tengah */
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: black;
-    border-radius: 5px;
-}
-
-.Lore-box::-webkit-scrollbar {
-    width: 6px;
-}
-
-.Lore-box::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
-}
-
-.Lore-box.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%);
-}
-
-.Lore-box.hide {
-    opacity: 0;
-    transform: translate(-50%, -60%);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.Lore-box ul {
-    list-style-type: none;
-}
-
-.Lore-box li {
-    margin: 10px 0;
-}
-
-.lore-rows {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-}
-
-.lore-row {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: black;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-.lore-row:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
-.lore-image-container {
-    display: flex;
-    justify-content: center;  /* Tengah horizontal */
-    gap: 20px;                /* Jarak antar gambar */
-}
-
-.lore-image {
-    max-width: 114px;
-    height: auto;
-    margin-bottom: 40px; /* Jarak antara gambar dan teks */
-}
-
-.lore-content p {
-    line-height: 1.5;  /* Jarak antar baris lebih renggang */
-    text-align: center;
-}
-
-.lore-content.show {
-    display: block;
-    opacity: 1;
-}
-
-.closed-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: transparent;
-    border: none;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    color: black;
-}
-
-.closed-btn:hover {
-    color: red;
-}
-
 /* Related to Character*/
 .character-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Memastikan elemen tetap di tengah */
-    gap: 20px; /* Menambahkan jarak antara karakter dan input */
+    height: 100vh;
+    gap: 20px;
 }
 
 #prevBtn {
@@ -316,7 +191,7 @@ body {
 }
 
 .slider-container {
-    width: 114px; /* Show one character at a time */
+    width: 114px;
     height: 169px;
     overflow: hidden;
     position: relative;
@@ -377,7 +252,7 @@ button:hover {
 }
 
 #startBtn {
-    background-color: #ebebeb; /* Slightly darker beige */
+    background-color: #ebebeb;
     color: black;
     border: none;
     font-size: 18px;
@@ -389,7 +264,7 @@ button:hover {
 }
 
 #startBtn:hover {
-    background-color: #B8A89E; /* Darker beige on hover */
+    background-color: #B8A89E;
     transform: scale(1.05);
 }
 
@@ -409,27 +284,14 @@ button:hover {
     z-index: 9999;
 }
 
-/*.loading-screen img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    filter: blur(5px);
-} */
-
 .loading-title {
     font-size: 2.5rem;
     margin-bottom: 15px;
-    /* z-index: 2; Di depan gambar */
 }
 
 .loading-title2 {
     font-size: 1rem;
     margin-bottom: 30px;
-    /* z-index: 2; Di depan gambar */
 }
 
 
@@ -441,7 +303,6 @@ button:hover {
     margin: 0 auto;
     opacity: 0;
     animation: moveLine 5s ease-in-out 1;
-    /* z-index: 2; Di depan gambar */
 }
 
 .grow-line {
@@ -453,7 +314,6 @@ button:hover {
     opacity: 0;
     animation: growLineCenter 2s ease-in-out 1 forwards;
     animation-delay: 5.5s;
-    /* z-index: 2; Di depan gambar */
 }
 
 /* moveLine Animation */
