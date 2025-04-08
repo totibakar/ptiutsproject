@@ -284,6 +284,25 @@ button:hover {
     z-index: 9999;
 }
 
+#audioToggleBtn {
+    position: absolute;
+    bottom: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid white;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 10000;
+}
+
+#audioToggleBtn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
 .loading-title {
     font-size: 2.5rem;
     margin-bottom: 15px;

@@ -84,17 +84,55 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Intro
+// Intro Loading Screen
 window.addEventListener('load', () => {
     setTimeout(() => {
         document.querySelector('.loading-screen').style.opacity = '0';
         document.querySelector('.loading-screen').style.transition = 'opacity 1s ease';
 
+        if (audioEnabled) {
+            fadeOutAudio(audio, 550);
+        }
+
         setTimeout(() => {
             document.querySelector('.loading-screen').style.display = 'none';
         }, 1000);
-    }, 7500); // 5s moveLine + 0.5s delay + 2s growLineCenter
+    }, 10500); 
 });
+
+const audio = document.getElementById("introAudio");
+const audioBtn = document.getElementById("audioToggleBtn");
+
+let audioEnabled = false;
+
+audioBtn.addEventListener("click", () => {
+    if (!audioEnabled) {
+        audio.volume = 1;
+        audio.play().catch(e => console.log("Autoplay blocked:", e));
+        audioEnabled = true;
+        audioBtn.textContent = "🔇 Mute Audio";
+    } else {
+        audio.pause();
+        audioEnabled = false;
+        audioBtn.textContent = "🔊 Enable Audio";
+    }
+});
+
+// Fade out function
+function fadeOutAudio(audioElement, duration = 1000) {
+    let fadeInterval = 50;
+    let fadeStep = audio.volume / (duration / fadeInterval);
+
+    const fade = setInterval(() => {
+        if (audio.volume > fadeStep) {
+            audio.volume = Math.max(0, audio.volume - fadeStep);
+        } else {
+            audio.volume = 0;
+            audio.pause();
+            clearInterval(fade);
+        }
+    }, fadeInterval);
+}
 
 // Clock
 function updateClock() {
