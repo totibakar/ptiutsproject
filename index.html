@@ -15,7 +15,7 @@
         <div class="loading-line"></div>
         <div class="grow-line"></div>
         <button id="audioToggleBtn">🔊 Enable Audio</button>
-        <audio id="introAudio" src="assets/audio/temp.mp3"></audio>
+        <audio id="introAudio" src="assets/sound/temp.mp3"></audio>
     </div>
 
     <!-- Navbar -->
@@ -24,6 +24,7 @@
             <button class="menu-btn">☰</button>
             <div class="dropdown">
                 <a href="#" id="readMeBtn">Read me</a>
+                <a href="#" id="RelicBtn">Relics</a>
             </div>
         </div>
     </div>
@@ -36,7 +37,7 @@
         <img src="assets/Room.png">
     </div>
 
-        <!-- Rules Box (Initially Hidden) -->
+    <!-- Rules Box (Initially Hidden) -->
     <div class="rules-box" id="rulesBox">
         <button class="close-btn">×</button>
         <ul>
@@ -48,6 +49,101 @@
             <li><b>• Have fun!</li>
         </ul>
     </div>
+
+    <!-- Relic Box (Initially Hidden) -->
+    <div class="Relic-box" id="relicBox">
+        <button class="closed-btn">×</button>
+    
+        <div class="relic-rows">
+        <button class="relic-row" onclick="toggleRelic(1)">Relic 1</button>
+        <button class="relic-row" onclick="toggleRelic(2)">Relic 2</button>
+        <button class="relic-row" onclick="toggleRelic(3)">Relic 3</button>
+        <button class="relic-row" onclick="toggleRelic(4)">Relic 4</button>
+        <button class="relic-row" onclick="toggleRelic(5)">Relic 5</button>
+        <button class="relic-row" onclick="toggleRelic(6)">Relic 6</button>
+        <button class="relic-row" onclick="toggleRelic(7)">Relic 7</button>
+        <button class="relic-row" onclick="toggleRelic(8)">Relic 8</button>
+        </div>
+    
+        <div class="relic-content" id="relicContent1">
+        <div class="relic-image-container">
+            <img src="assets/relic/Celurit.png" class="relic-image" />
+        </div>
+        <p><b>
+            The Celurit (also known as clurit) is a traditional curved blade weapon originating from Madura, an island in East Java, Indonesia. It is often associated with the Madurese people and 
+            holds both cultural and symbolic significance.
+        </b></p>
+        </div>
+    
+        <div class="relic-content" id="relicContent2">
+        <div class="relic-image-container">
+            <img src="assets/relic/Gambus.png" class="relic-image" />
+        </div>
+        <p><b>
+            The Gambus is a traditional stringed instrument with roots in Middle Eastern music, but over centuries, it has evolved into a unique cultural expression in Indonesia and Malaysia 
+            — especially in regions with strong Islamic influence.
+        </b></p>
+        </div>
+    
+        <div class="relic-content" id="relicContent3">
+        <div class="relic-image-container">
+            <img src="assets/relic/Keris.png" class="relic-image" />
+        </div>
+        <p><b>
+            The Keris is a traditional asymmetrical dagger from Indonesia, recognized for its distinctive wavy blade and deep spiritual symbolism. It is a revered cultural artifact with roots 
+            in ancient Javanese traditions.
+        </b></p>
+        </div>
+    
+        <div class="relic-content" id="relicContent4">
+        <div class="relic-image-container">
+            <img src="assets/relic/Kujang.png" class="relic-image" />
+        </div>
+        <p><b>The Kujang is a traditional weapon from West Java, Indonesia, especially associated with the Sundanese people. With its unique, curved blade resembling a buffalo horn or sickle, 
+              the Kujang serves not only as a weapon but also as a symbol of wisdom, strength, and spiritual power.
+        </b></p>
+        </div>
+    
+        <div class="relic-content" id="relicContent5">
+        <div class="relic-image-container">
+            <img src="assets/relic/Parang.png" class="relic-image" />
+        </div>
+        <p><b>
+            The Parang is a traditional bladed tool and weapon widely used across Indonesia, Malaysia, and the Philippines. In Indonesia, it’s especially associated with rural and tribal 
+            communities, where it plays a vital role in daily life.
+        </b></p>
+        </div>
+    
+        <div class="relic-content" id="relicContent6">
+        <div class="relic-image-container">
+            <img src="assets/relic/Topeng-barong.png" class="relic-image" />
+        </div>
+        <p><b>
+            The Topeng Barong is a traditional Balinese mask representing Barong, the king of spirits and a symbol of goodness in Balinese mythology. Barong is often depicted as a lion-like 
+            creature with a vibrant, elaborately decorated mask used in dramatic performances known as the Barong dance.
+        </b></p>
+        </div>
+    
+        <div class="relic-content" id="relicContent7">
+        <div class="relic-image-container">
+            <img src="assets/relic/topeng-ondel.png" class="relic-image" />
+        </div>
+        <p><b>
+            Ondel-Ondel is a large puppet figure and a key part of Betawi (native Jakarta) cultural performances. The Topeng (mask) on Ondel-Ondel represents protective spirits, traditionally 
+            used to ward off evil and bring blessings to the community.
+        </b></p>
+        </div>
+    
+        <div class="relic-content" id="relicContent8">
+        <div class="relic-image-container">
+            <img src="assets/relic/Wayang-gunungan.png" class="relic-image" />
+        </div>
+        <p><b>
+            The Gunungan is a symbolic element in Wayang (shadow puppet) performances from Indonesia, especially Java and Bali. It represents the beginning and end of a story, 
+            and serves as a divider between scenes or worlds — the spiritual and the physical.
+        </b></p>
+        </div>
+    </div>
         
     <!-- Character Selection Slider and Input/start button-->
      <div class="character-wrapper">
@@ -57,11 +153,15 @@
             </button>
             <div class="slider-container">
                 <div class="slider">
-                    <img src="assets/Yoshiki.png" class="character">
-                    <img src="assets/Hikaru.png" class="character">
-                    <img src="assets/Maki.png" class="character">
-                    <img src="assets/Tadokoro.png" class="character">
-                    <img src="assets/Yamagishi.png" class="character">
+                    <div class="character-slot">
+                        <img src="assets/MagePC/MageIdle/idle5.png" class="character">
+                    </div>
+                    <div class="character-slot">
+                        <img src="assets/MercenaryPC/MercenaryIdle/idle5.png" class="character">
+                    </div>
+                    <div class="character-slot">
+                        <img src="assets/RangerPC/RangerIdle/idle5.png" class="character">
+                    </div>
                 </div>
             </div>
             <button id="nextBtn">

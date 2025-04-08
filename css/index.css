@@ -60,7 +60,7 @@ body {
     position: absolute;
     bottom: 100%;
     left: 0;
-    background-color: rgba(151, 113, 64);
+    background-color: #b88c4c;
     border: 1px solid black;
     min-width: 120px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -89,7 +89,7 @@ body {
     transform: translateY(0);
 }
 
-/* Game Rules Box */
+/* Read me Box */
 .rules-box {
     position: fixed;
     top: 50%;
@@ -146,6 +146,132 @@ body {
     color: red;
 }
 
+/* Relics box */
+.Relic-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 50%;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: rgba(151, 113, 64);
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    z-index: 1000;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.relic-content {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: black;
+    border-radius: 5px;
+}
+
+.Relic-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.Relic-box::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.Relic-box.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+}
+
+.Relic-box.hide {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.Relic-box ul {
+    list-style-type: none;
+}
+
+.Relic-box li {
+    margin: 10px 0;
+}
+
+.relic-rows {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.relic-row {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: black;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.relic-row:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.relic-image-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.relic-image {
+    max-width: 114px;
+    height: auto;
+    margin-bottom: 40px;
+}
+
+.relic-content p {
+    line-height: 1.5;
+    text-align: center;
+}
+
+.relic-content.show {
+    display: block;
+    opacity: 1;
+}
+
+.closed-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+}
+
+.closed-btn:hover {
+    color: red;
+}
+
+
 /* Related to Character*/
 .character-wrapper {
     display: flex;
@@ -191,7 +317,7 @@ body {
 }
 
 .slider-container {
-    width: 114px;
+    width: 128px;
     height: 169px;
     overflow: hidden;
     position: relative;
@@ -201,14 +327,22 @@ body {
 .slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    gap: 20px;
+    gap: -20px;
     width: fit-content;
 }
 
-.character { /*Image*/
-    width: 114px;
+.character-slot {
+    width: 128px;
     height: 169px;
-    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.character {
+    width: 128px;
+    height: 128px;
+    image-rendering: pixelated;
 }
 
 /* Input & Button */

@@ -1,0 +1,987 @@
+body {
+    display: flex;
+    flex-direction: column; /* Susun header di atas main */
+    margin: 0;
+    height: 100vh; /* Tinggi penuh viewport */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font default modern */
+    background-color: #3a3a3a; /* Latar belakang lebih gelap */
+    color: #e0e0e0; /* Teks default terang */
+}
+
+#gameHeader {
+    background-color: #222; /* Header lebih gelap */
+    color: #e5d8b4; /* Warna teks krem */
+    padding: 8px 20px;
+    text-align: center;
+    font-family: 'MedievalSharp', cursive; /* Font tema fantasi untuk header */
+    border-bottom: 2px solid #555;
+    position: relative; /* Add this to ensure header stays above UI Panel */
+    z-index: 100; /* Ensure header stays above UI Panel */
+}
+
+#gameContainer {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    padding: 20px;
+    gap: 20px;
+    justify-content: center; /* Changed back to center */
+    align-items: center; /* Changed to center */
+    margin-left: 0;
+    margin-bottom: 0;
+    position: relative; /* Add this for proper positioning */
+    height: calc(100vh - 60px); /* Subtract header height */
+}
+
+/* Wrapper baru untuk game area dan UI overlay */
+#game-display-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto; /* Center horizontally */
+    /* Remove specific margins and let container handle positioning */
+}
+
+#gameArea {
+    position: relative;
+    background-color: #1a1a1a;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #444;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    overflow: hidden;
+    margin: 0 auto; /* Center the game area */
+}
+
+canvas {
+    border: 1px solid #555;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+}
+
+#uiPanel {
+    position: fixed;
+    right: 0;
+    top: 60px;
+    width: 400px;
+    height: calc(100vh - 60px);
+    background-color: #2c2c2c;
+    color: #ccc;
+    padding: 15px;
+    border-left: 2px solid #444;
+    border-radius: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+    box-shadow: -5px 0 10px rgba(0,0,0,0.4);
+    z-index: 50;
+}
+
+#uiPanel h2 {
+    margin-top: 0;
+    text-align: center;
+    border-bottom: 1px solid #555;
+    padding-bottom: 10px;
+    color: #e5d8b4;
+    font-family: 'Uncial Antiqua', cursive;
+}
+
+/* Add new styles for popup content in UI Panel */
+#uiPanel .popup-content {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 5px;
+    border: 1px solid #555;
+}
+
+#uiPanel .popup-location-name {
+    color: #e5d8b4;
+    font-family: 'Uncial Antiqua', cursive;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#uiPanel .popup-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#uiPanel .popup-options li {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background-color: #444;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#uiPanel .popup-options li:hover {
+    background-color: #555;
+}
+
+#uiPanel .popup-close-btn {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    background-color: #a04040;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#uiPanel .popup-close-btn:hover {
+    background-color: #c05050;
+}
+
+h1 { margin-bottom: 0; font-size: 1.8em; } /* Sesuaikan styling header */
+h2 { margin-bottom: 15px; font-size: 1.4em; }
+
+/* --- Styling untuk UI Overlay Baru --- */
+
+/* Hapus style #player-stats lama */
+/* #player-stats { ... } */
+
+/* --- Styling untuk Gold & Relics (Tetap sama, di luar #gameArea) --- */
+#player-gold, #relic-display {
+    position: absolute;
+    background-color: rgba(30, 30, 30, 0.85);
+    color: #e0e0e0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    z-index: 10; /* Di atas wrapper tapi mungkin di bawah bar UI game */
+    user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+#player-gold {
+    position: absolute;
+    background-color: rgba(30, 30, 30, 0.85);
+    color: #e0e0e0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    z-index: 20; /* Same as other UI elements */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    top: 50px; /* Same as hp-hunger-frame */
+    left: 50px; /* Position to the right of hp-hunger-frame */
+    min-width: 90px;
+    text-align: left;
+    font-weight: bold;
+}
+
+#player-gold span { 
+    color: #ffd700; 
+}
+
+#relic-display {
+    position: absolute;
+    left: 50%;
+    top: -40px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    padding: 6px 8px;
+    background-color: rgba(30, 30, 30, 0.85);
+    color: #e0e0e0;
+    border-radius: 4px;
+    font-size: 13px;
+    z-index: 10;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.relic-slot {
+    width: 24px;
+    height: 24px;
+    background-color: #333;
+    border: 1px solid #666;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
+    transition: all 0.3s ease;
+}
+
+.relic-slot.found {
+    background: radial-gradient(circle, #fff5a1, #eab92d);
+    border-color: #b8860b;
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.8), inset 0 1px 1px rgba(255,255,255,0.3);
+}
+
+/* --- Styling untuk UI Bars BARU (DI DALAM #gameArea) --- */
+
+#hp-hunger-frame, #stamina-frame {
+    position: absolute;
+    z-index: 20; /* Di atas canvas, gold, relic */
+    background-repeat: no-repeat;
+    background-size: contain; /* Atau 'cover', atau width/height spesifik */
+    pointer-events: none; /* Agar tidak menghalangi klik pada canvas di bawahnya */
+    /* !!! SESUAIKAN WIDTH & HEIGHT BERIKUT SESUAI UKURAN GAMBAR FRAME ANDA !!! */
+}
+
+#hp-hunger-frame {
+    background-image: url('/assets/inuse/HungerBar.png');
+    top: 18px; /* Jarak dari tepi atas #gameArea */
+    left: 15px; /* Jarak dari tepi kiri #gameArea */
+    width: 150px; /* <<< CONTOH UKURAN */
+    height: 150px; /* <<< CONTOH UKURAN */
+}
+
+#stamina-frame {
+    background-image: url('/assets/inuse/StaminaBar.png');
+    bottom: 20px;
+    left: 20px;
+    width: 300px;  /* <<< DIPERBESAR dari 250px */
+    height: 40px;  /* <<< DIPERBESAR dari 30px */
+}
+
+#hp-bar, #hunger-bar, #stamina-bar {
+    position: absolute;
+    background-repeat: no-repeat;
+    /* 'cover' akan stretch gambar bar, '100% 100%' sama, atau biarkan default jika barnya tileable */
+    /* background-size: cover; <-- Dihapus dari sini */
+    /* Tentukan background-position jika bar perlu dimulai dari kiri/kanan */
+    /* background-position: left center; <-- Dihapus dari sini */
+    height: 100%; /* Tinggi awal, sesuaikan jika perlu */
+    width: 100%; /* Lebar awal (akan diubah JS) */
+    overflow: hidden; /* Potong bar jika melebihi elemen */
+    /* transition: width 0.2s ease-out; <-- Dipindah ke spesifik bar */
+
+    /* !!! SESUAIKAN TOP, LEFT, WIDTH (max), HEIGHT BERIKUT !!! */
+    /* Sesuaikan dengan area kosong di dalam gambar frame Anda */
+}
+
+#hp-bar, #stamina-bar { /* Menggabungkan style untuk HP & Stamina */
+    /* background-size: cover; <-- Dihapus dari sini juga jika ada */
+    /* Ukuran: lebar otomatis, tinggi 100% elemen */
+    background-size: auto 100%;
+    /* Posisi: tempel kiri, tengah vertikal */
+    background-position: left center;
+    /* width: 100%; <-- Sudah ada di atas? Dihapus jika duplikat */
+    transition: width 0.2s ease-out;
+    /* Hapus height: 100% di sini karena sudah ada di bawah */
+}
+
+#hp-bar {
+    background-image: url('/assets/inuse/HealthBar.png');
+    top: 9px;
+    left: 36px;
+    height: 10px; /* Tinggi spesifik elemen */
+    max-width: 110px;
+}
+
+#hunger-bar {
+    position: absolute;
+    background-image: url('/assets/inuse/HungerBar.png');
+    background-repeat: no-repeat;
+    /* Ukuran: lebar 100% elemen, tinggi otomatis */
+    background-size: 100% auto;
+    /* Posisi: tengah horizontal, tempel bawah */
+    background-position: center bottom;
+    width: 10px; /* Lebar spesifik elemen */
+    height: 100%; /* Tinggi awal 100%, diubah JS */
+    overflow: hidden;
+    transition: height 0.2s ease-out;
+    top: 25%;
+    left: 15px;
+}
+
+#stamina-bar {
+    /* Menggunakan style gabungan di atas */
+    background-image: url('/assets/inuse/StaminaBar.png');
+    top: 0px;    /* Sesuaikan jika perlu */
+    left: 0px;   /* Sesuaikan jika perlu */
+    height: 40px; /* <<< DIPERBESAR dari 20px */
+    max-width: 290px; /* <<< DIPERBESAR & disesuaikan (lebar frame 300 - padding kiri/kanan ~10) */
+}
+
+/* --- Styling untuk Popup Interaksi --- */
+#interaction-popup {
+    position: fixed; /* Tetap di layar, menutupi segalanya */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Latar belakang gelap transparan */
+    z-index: 100; /* Pastikan di atas elemen lain */
+    display: none; /* Sembunyikan secara default */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px); /* Efek blur (opsional, cek browser support) */
+}
+
+#interaction-popup.visible {
+    display: flex; /* Tampilkan saat class 'visible' ditambahkan */
+}
+
+#popup-content {
+    background-color: #2f2f2f; /* Warna sedikit lebih terang dari UI panel */
+    color: #e0e0e0;
+    padding: 25px 35px;
+    border-radius: 8px;
+    border: 2px solid #555;
+    min-width: 350px;
+    max-width: 50%; /* Batasi lebar */
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    position: relative; /* Untuk tombol close absolut */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#popup-content h3 {
+    margin-top: 0;
+    text-align: center;
+    color: #e5d8b4; /* Warna judul lokasi */
+    font-family: 'Uncial Antiqua', cursive;
+    border-bottom: 1px solid #666;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#popup-options {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0; /* Jarak bawah sebelum tombol close */
+}
+
+#popup-options li {
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    background-color: #444;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border: 1px solid #585858;
+}
+
+#popup-options li:hover {
+    background-color: #5a5a5a;
+    color: #fff;
+}
+
+#popup-close-btn {
+    display: block; /* Agar bisa diatur margin auto */
+    margin: 0 auto; /* Pusatkan tombol */
+    padding: 8px 20px;
+    background-color: #a04040; /* Warna merah untuk tutup */
+    color: white;
+    border: 1px solid #702020;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+#popup-close-btn:hover {
+    background-color: #c05050;
+}
+
+/* Optional: Menghilangkan UI game saat popup aktif */
+/* #interaction-popup.visible ~ #game-display-wrapper #hp-hunger-frame,
+#interaction-popup.visible ~ #game-display-wrapper #stamina-frame {
+    opacity: 0.3;
+    pointer-events: none;
+} */
+
+/* --- Styling untuk Menu Pause --- */
+#pause-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Sedikit lebih gelap dari popup interaksi? */
+    z-index: 110; /* Di atas popup interaksi jika perlu */
+    display: none; /* Sembunyikan default */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px); /* Blur lebih kuat? */
+}
+
+#pause-menu.visible {
+    display: flex;
+}
+
+#pause-content {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    padding: 30px 40px;
+    border-radius: 6px;
+    border: 2px solid #666;
+    min-width: 300px;
+    max-width: 40%;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+#pause-content h3 {
+    margin-top: 0;
+    color: #f0e0c0; /* Warna judul pause */
+    font-family: 'MedievalSharp', cursive; /* Font tema */
+    font-size: 1.6em;
+    border-bottom: 1px solid #777;
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+}
+
+#pause-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#pause-options li {
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    background-color: #484848;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #606060;
+    font-weight: 500;
+}
+
+#pause-options li:hover {
+    background-color: #606060;
+    color: #fff;
+    transform: scale(1.03); /* Efek hover sedikit membesar */
+    border-color: #888;
+}
+
+.volume-controls {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+.volume-slider {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.volume-slider:last-child {
+    margin-bottom: 0;
+}
+
+.volume-slider label {
+    display: block;
+    margin-bottom: 5px;
+    color: #e5d8b4;
+    font-size: 0.9em;
+}
+
+.volume-slider input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: #444;
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.volume-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #e5d8b4;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.volume-slider input[type="range"]::-webkit-slider-thumb:hover {
+    background: #f0e0c0;
+}
+
+.volume-slider input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #e5d8b4;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border: none;
+}
+
+.volume-slider input[type="range"]::-moz-range-thumb:hover {
+    background: #f0e0c0;
+}
+
+.volume-slider input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    background: #444;
+    border-radius: 3px;
+}
+
+.volume-slider input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background: #444;
+    border-radius: 3px;
+}
+
+/* Add focus styles for better accessibility */
+.volume-slider input[type="range"]:focus {
+    outline: none;
+}
+
+.volume-slider input[type="range"]:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 2px rgba(229, 216, 180, 0.3);
+}
+
+.volume-slider input[type="range"]:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 2px rgba(229, 216, 180, 0.3);
+}
+
+/* Add disabled state styles */
+.volume-slider input[type="range"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.volume-slider input[type="range"]:disabled::-webkit-slider-thumb {
+    background: #888;
+}
+
+.volume-slider input[type="range"]:disabled::-moz-range-thumb {
+    background: #888;
+}
+
+/* --- Styling untuk Layar Save/Load --- */
+#saveload-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 20, 0.9); /* Latar belakang lebih gelap, sedikit biru */
+    z-index: 120; /* Di atas menu pause */
+    display: none; /* Sembunyikan default */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    color: #ccc; /* Teks default terang */
+}
+
+#saveload-menu.visible {
+    display: flex;
+}
+
+#saveload-content {
+    background-color: #1e1e28; /* Background lebih gelap dari pause */
+    padding: 20px 30px;
+    border-radius: 8px;
+    border: 1px solid #4a4a6a;
+    width: 70%;
+    max-width: 700px;
+    max-height: 80%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column; /* Susun vertikal */
+}
+
+#saveload-content h3 {
+    margin-top: 0;
+    text-align: center;
+    color: #c0c0e0;
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 1.8em;
+    border-bottom: 1px solid #4a4a6a;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#saveload-new {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #4a4a6a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#saveload-new label {
+    font-weight: 500;
+}
+
+#saveload-new input[type="text"] {
+    flex-grow: 1;
+    padding: 8px 10px;
+    background-color: #333;
+    border: 1px solid #555;
+    color: #ddd;
+    border-radius: 4px;
+}
+
+#saveload-new button,
+#saveload-back-btn {
+    padding: 8px 15px;
+    background-color: #4a4a6a;
+    color: white;
+    border: 1px solid #6a6a8a;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+#saveload-new button:hover,
+#saveload-back-btn:hover {
+    background-color: #6a6a8a;
+}
+
+#saveload-list-container {
+    flex-grow: 1; /* Ambil sisa ruang vertikal */
+    overflow-y: auto; /* Scroll jika daftar panjang */
+    margin-bottom: 15px;
+}
+#saveload-list-container h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #aaa;
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+
+#save-slots-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#save-slots-list li {
+    background-color: rgba(255, 255, 255, 0.05);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+#save-slots-list li:not(.no-saves):hover {
+    border-color: #6a6a8a;
+}
+
+#save-slots-list li img.save-preview {
+    width: 100px; /* Ukuran preview screenshot */
+    height: 75px;
+    object-fit: cover; /* Crop agar pas */
+    border-radius: 3px;
+    border: 1px solid #444;
+}
+
+#save-slots-list li .save-info {
+    flex-grow: 1;
+}
+#save-slots-list li .save-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: #dfdfdf;
+}
+#save-slots-list li .save-timestamp {
+    font-size: 0.85em;
+    color: #999;
+}
+
+#save-slots-list li .save-actions button {
+    padding: 5px 10px;
+    font-size: 0.9em;
+    margin-left: 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid;
+}
+#save-slots-list li .save-actions button.load-btn {
+     background-color: #3a6a3a; color: white; border-color: #5a8a5a;
+}
+#save-slots-list li .save-actions button.load-btn:hover { background-color: #5a8a5a; }
+#save-slots-list li .save-actions button.delete-btn {
+     background-color: #8a3a3a; color: white; border-color: #aa5a5a;
+}
+#save-slots-list li .save-actions button.delete-btn:hover { background-color: #aa5a5a; }
+
+#save-slots-list li.no-saves {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+    background-color: transparent;
+    border: 1px dashed #444;
+}
+
+#saveload-back-btn {
+    margin-top: 10px; /* Jarak dari list */
+    align-self: center; /* Pusatkan tombol back */
+}
+
+#uiPanel .shop-section {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+#uiPanel .shop-section h4 {
+    color: #e5d8b4;
+    font-family: 'Uncial Antiqua', cursive;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+}
+
+#uiPanel .shop-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #333;
+    border-radius: 4px;
+    border: 1px solid #444;
+}
+
+#uiPanel .shop-item .item-name {
+    color: #e5d8b4;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+#uiPanel .shop-item .item-price {
+    color: #ffd700;
+    font-size: 0.9em;
+}
+
+#uiPanel .shop-item .item-stats {
+    color: #a0a0a0;
+    font-size: 0.9em;
+}
+
+#uiPanel .shop-item button {
+    margin-top: 5px;
+    padding: 6px 12px;
+    background-color: #4a4a6a;
+    color: white;
+    border: 1px solid #6a6a8a;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+#uiPanel .shop-item button:hover {
+    background-color: #6a6a8a;
+}
+
+/* --- Quest System Styling --- */
+#uiPanel .quest-content {
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    margin-bottom: 15px;
+}
+
+#uiPanel .quest-content h3 {
+    color: #e5d8b4;
+    font-family: 'Uncial Antiqua', cursive;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+}
+
+#uiPanel .quest-content p {
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+#uiPanel .quest-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#uiPanel .quest-options button {
+    padding: 10px 15px;
+    background-color: #4a4a6a;
+    color: white;
+    border: 1px solid #6a6a8a;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+#uiPanel .quest-options button:hover {
+    background-color: #6a6a8a;
+    transform: translateX(5px);
+}
+
+/* --- Game Over Popup Styling --- */
+#game-over-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.game-over-content {
+    background-color: #2a2a2a;
+    padding: 30px 40px;
+    border-radius: 8px;
+    border: 2px solid #a04040;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(160, 64, 64, 0.5);
+}
+
+.game-over-content h2 {
+    color: #e5d8b4;
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.game-over-content p {
+    color: #e0e0e0;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+.game-over-options {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.game-over-options button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.game-over-options button:first-child {
+    background-color: #4a6a4a;
+    color: white;
+}
+
+.game-over-options button:last-child {
+    background-color: #a04040;
+    color: white;
+}
+
+.game-over-options button:hover {
+    transform: scale(1.05);
+}
+
+.game-over-options button:first-child:hover {
+    background-color: #5a8a5a;
+}
+
+.game-over-options button:last-child:hover {
+    background-color: #c05050;
+}
+
+#uiPanel .location-panel {
+    display: none;
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    margin-bottom: 15px;
+}
+
+#uiPanel .location-panel.active {
+    display: block;
+}
+
+#uiPanel .location-panel h3 {
+    color: #e5d8b4;
+    font-family: 'Uncial Antiqua', cursive;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+}
+
+#uiPanel .location-panel .location-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#uiPanel .location-panel .location-options li {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background-color: #444;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#uiPanel .location-panel .location-options li:hover {
+    background-color: #555;
+}
+
+#uiPanel .location-panel .close-btn {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    background-color: #a04040;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#uiPanel .location-panel .close-btn:hover {
+    background-color: #c05050;
+}

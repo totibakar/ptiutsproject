@@ -3,61 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arena</title>
-    <link rel="stylesheet" href="css/arenastyle.css">
+    <title>Game Eksplorasi Elendor</title>
+    <link rel="stylesheet" href="css/Arena.css">
+    <!-- Pertimbangkan font yang lebih cocok tema fantasi jika ada -->
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <!-- Audio elements for sound effects -->
+    <audio id="hoverSound" src="assets/sound/HoverMouse.wav" preload="auto"></audio>
+    <audio id="pauseSound" src="assets/sound/Pause.wav" preload="auto"></audio>
+    <audio id="unpauseSound" src="assets/sound/Unpause.wav" preload="auto"></audio>
+    <audio id="walkSound" src="assets/sound/Dirt Chain Walk.ogg" preload="auto"></audio>
+    <audio id="runSound" src="assets/sound/Dirt Chain Run.ogg" preload="auto"></audio>
 </head>
 <body>
-    <div>
-        <div class="top-div">
-            <h1>Ucup Menjelajah Nusantara</h1>
+    <header id="gameHeader">
+        <h1>Eksplorasi Dunia ELendor</h1>
+    </header>
+    <main id="gameContainer">
+        <!-- Wrapper baru untuk game area dan UI overlay -->
+        <div id="game-display-wrapper">
+            <div id="gameArea">
+                <canvas id="gameCanvas"></canvas>
+                <!-- UI Bars DI DALAM Game Area -->
+                <div id="hp-hunger-frame">
+                    <div id="hp-bar"></div>
+                    <div id="hunger-bar"></div>
+                </div>
+                <div id="stamina-frame">
+                    <div id="stamina-bar"></div>
+                </div>
+                <!-- UI Gold moved inside gameArea -->
+                <div id="player-gold">
+                    Gold: <span id="gold-value">0</span> G
+                </div>
+            </div>
+            <!-- UI Overlay di LUAR Game Area (Gold & Relics) -->
+            <div id="relic-display">
+                <div class="relic-slot" title="Relic 1 (Undiscovered)"></div>
+                <div class="relic-slot" title="Relic 2 (Undiscovered)"></div>
+                <div class="relic-slot" title="Relic 3 (Undiscovered)"></div>
+                <div class="relic-slot" title="Relic 4 (Undiscovered)"></div>
+                <div class="relic-slot" title="Relic 5 (Undiscovered)"></div>
+                <div class="relic-slot" title="Relic 6 (Undiscovered)"></div>
+                <div class="relic-slot" title="Relic 7 (Undiscovered)"></div>
+                <div class="relic-slot" title="Relic 8 (Undiscovered)"></div>
+            </div>
         </div>
 
-        <div class="main-container">
-            <div class="bottom-div">
-                <div class="status-row">
-                    <p>Good Morning, (Player Name)!</p>
-                    <p id="datetime"></p>
-                    <p>Money: (money)</p>
+        <!-- === MENU PAUSE === -->
+        <div id="pause-menu">
+             <div id="pause-content">
+                 <h3>Game Dijeda</h3>
+                 <div class="volume-controls">
+                     <div class="volume-slider">
+                         <label for="main-volume">Main Volume</label>
+                         <input type="range" id="main-volume" min="0" max="100" value="100">
+                     </div>
+                     <div class="volume-slider">
+                         <label for="music-volume">Music Volume</label>
+                         <input type="range" id="music-volume" min="0" max="100" value="100">
+                     </div>
+                     <div class="volume-slider">
+                         <label for="ui-volume">UI Volume</label>
+                         <input type="range" id="ui-volume" min="0" max="100" value="100">
+                     </div>
+                 </div>
+                 <ul id="pause-options">
+                     <li onclick="continueGame()">Lanjutkan [Esc]</li>
+                     <li onclick="showSaveLoadMenu('save')">Simpan Game</li>
+                     <li onclick="showSaveLoadMenu('load')">Muat Game</li>
+                     <li onclick="restartGame()">Mulai Ulang</li>
+                     <li onclick="goToMainMenu()">Menu Utama</li>
+                     <li onclick="exitGame()">Keluar</li>
+                 </ul>
+             </div>
+        </div>
+        <!-- ======================= -->
+
+        <!-- === LAYAR SAVE/LOAD BARU === -->
+        <div id="saveload-menu">
+            <div id="saveload-content">
+                <h3 id="saveload-title">Simpan/Muat Game</h3>
+                <div id="saveload-new">
+                    <label for="save-name-input">Nama Save:</label>
+                    <input type="text" id="save-name-input" placeholder="My Adventure">
+                    <button id="create-save-btn">Simpan Baru</button>
                 </div>
-                <div class="status-row">
-                    <p>Hunger: w%</p>
-                    <p>Sleep: x%</p>
-                    <p>Happiness: y%</p>
-                    <p>Hygiene: z%</p>
+                <div id="saveload-list-container">
+                    <h4>Slot Tersimpan:</h4>
+                    <ul id="save-slots-list">
+                        <!-- Slot save akan diisi oleh JS -->
+                        <li class="no-saves">Belum ada game yang disimpan.</li>
+                    </ul>
                 </div>
-                <div class="locations">
-                    <div id="player" class="player" draggable="true" ondragstart="startDrag(event)" ondragend="endDrag(event)"></div>
-                    <button class="circle-button" style="top: 20%; left: 30%;">Home</button>
-                    <button class="circle-button" style="top: 50%; left: 20%;">Beach</button>
-                    <button class="circle-button" style="top: 70%; left: 50%;">Lake</button>
-                    <button class="circle-button" style="top: 30%; left: 70%;">Temple</button>
-                    <button class="circle-button" style="top: 60%; left: 80%;">Mountain</button>
-                </div>
-            </div>
-            <div class="separator"></div>
-            <div class="side-div">
-                <div class="move-buttons">
-                    <div class="horizontal-buttons">
-                        <div class="button-container">
-                            <button class="circle-button" onclick="movePlayer('up')">Up</button>
-                        </div>
-                        rrrrrr
-                        <div class="button-container">
-                            <button class="circle-button" onclick="movePlayer('left')">Left</button><br><br><br>
-                        </div>
-                        rrrrrrrr
-                        <div class="button-container">
-                            <button class="circle-button" onclick="movePlayer('down')">Down</button>
-                        </div>
-                        rrrrrr
-                        <div class="button-container">
-                            <button class="circle-button" onclick="movePlayer('right')">Right</button>
-                        </div>
-                    </div>
-                </div>
+                <button id="saveload-back-btn">Kembali</button>
             </div>
         </div>
-    </div>
-    <script src="js/arenascript.js"></script>
+        <!-- ========================== -->
+
+        <aside id="uiPanel">
+            <h2>UI Panel</h2>
+            <!-- Popup content for each location -->
+            <div id="location-panels">
+                <!-- Panels will be dynamically created here -->
+            </div>
+        </aside>
+    </main>
+
+    <script src="js/Arena.js"></script>
 </body>
-</html>
+</html> 
