@@ -5,10 +5,10 @@ Group members: <br/>
 • Dylan Wilson - 00000134282 <br/>
 
 Gameplay rules: (temp)<br/>
-• 1 Menit di dalam game = 1 detik di dunia nyata. <br/>
-• Ada 6 status yang harus kamu lihat, yaitu: Makan, Minum, Tidur, Bermain, Olahraga, dan Belajar. <br/>
-• Jika salah satu dari status bar habis, maka akan ada konsekuensi yang akan didapatkan. <br/>
-• Semester akan bertambah ketika status belajar penuh. <br/>
+• 1 minute in-game means 1 second in real life. <br/>
+• There are 6 statuses that you need to see, namely: hunger, hydration, happiness, and hygiene. <br/>
+• If one of the status bars runs out, there will be consequences. <br/>
+• Temp <br/>
 • Game akan berakhir ketika status belajar kosong untuk waktu yang lama. <br/>
-• Ketika ada status yang belum ditambahkan (contoh: makan) dalam waktu tertentu, maka status tersebut akan berkurang. <br/>
+• When there is a status that has not been added (for example, eating) within a certain time, the status will be reduced. <br/>
 • Have fun!
