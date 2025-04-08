@@ -52,7 +52,9 @@
     <!-- Character Selection Slider and Input/start button-->
      <div class="character-wrapper">
         <div class="character-selection">
-            <button id="prevBtn">❮</button>
+            <button id="prevBtn">
+                <img src="assets/Prevbtn.png" alt="Previous" class="arrow-icon">    
+            </button>
             <div class="slider-container">
                 <div class="slider">
                     <img src="assets/Yoshiki.png" class="character">
@@ -62,13 +64,15 @@
                     <img src="assets/Yamagishi.png" class="character">
                 </div>
             </div>
-            <button id="nextBtn">❯</button>
+            <button id="nextBtn">
+                <img src="assets/Nextbtn.png" alt="Previous" class="arrow-icon"> 
+            </button>
         </div>
 
         <div class="input-container">
         <label for="playerName" class="input-label">What is your name?</label>
         <input type="text" id="playerName">
-        <button id="startBtn" type="submit" onclick="window.location.href='arena.html';"><b>Start Exploring</b></button>
+        <button id="startBtn" type="submit" onclick="window.location.href='arena.html'"><b>Start Exploring!</b></button>
     </div>
     </div>
 
