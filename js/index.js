@@ -122,10 +122,9 @@ function updateClock() {
   }
   
   const gmtOffsetAbbreviationMap = {
-    'GMT+9': 'JST',
     'GMT+7': 'WIB',
     'GMT+8': 'WITA',
-    'GMT+0': 'GMT',
+    'GMT+9': 'WIT',
   };
   
   setInterval(updateClock, 1000);
