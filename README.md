@@ -1,8 +1,8 @@
 Game Features: <br/>
 • Isi sendiri <br/>
-• si sendiri <br/>
-• si sendiri <br/>
-• si sendiri <br/>
+• Isi sendiri <br/>
+• Isi sendiri <br/>
+• Isi sendiri <br/>
 
 
 
