@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Eksplorasi Elendor</title>
     <link rel="stylesheet" href="css/Arena.css">
-    <!-- Pertimbangkan font yang lebih cocok tema fantasi jika ada -->
+    <link rel="stylesheet" href="css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Uncial+Antiqua&display=swap" rel="stylesheet">
-    <!-- Audio elements for sound effects -->
     <audio id="hoverSound" src="assets/sound/HoverMouse.wav" preload="auto"></audio>
     <audio id="pauseSound" src="assets/sound/Pause.wav" preload="auto"></audio>
     <audio id="unpauseSound" src="assets/sound/Unpause.wav" preload="auto"></audio>
@@ -16,14 +15,12 @@
 </head>
 <body>
     <header id="gameHeader">
-        <h1>Eksplorasi Dunia ELendor</h1>
+        <h1>Elendor: Jejak Relik Nusantara</h1>
     </header>
     <main id="gameContainer">
-        <!-- Wrapper baru untuk game area dan UI overlay -->
         <div id="game-display-wrapper">
             <div id="gameArea">
                 <canvas id="gameCanvas"></canvas>
-                <!-- UI Bars DI DALAM Game Area -->
                 <div id="hp-hunger-frame">
                     <div id="hp-bar"></div>
                     <div id="hunger-bar"></div>
@@ -31,25 +28,25 @@
                 <div id="stamina-frame">
                     <div id="stamina-bar"></div>
                 </div>
-                <!-- UI Gold moved inside gameArea -->
                 <div id="player-gold">
-                    Gold: <span id="gold-value">0</span> G
+                    <span id="gold-value">0</span>
                 </div>
-            </div>
-            <!-- UI Overlay di LUAR Game Area (Gold & Relics) -->
-            <div id="relic-display">
-                <div class="relic-slot" title="Relic 1 (Undiscovered)"></div>
-                <div class="relic-slot" title="Relic 2 (Undiscovered)"></div>
-                <div class="relic-slot" title="Relic 3 (Undiscovered)"></div>
-                <div class="relic-slot" title="Relic 4 (Undiscovered)"></div>
-                <div class="relic-slot" title="Relic 5 (Undiscovered)"></div>
-                <div class="relic-slot" title="Relic 6 (Undiscovered)"></div>
-                <div class="relic-slot" title="Relic 7 (Undiscovered)"></div>
-                <div class="relic-slot" title="Relic 8 (Undiscovered)"></div>
+                <div id="game-time">
+                    <span id="time-value">Day 1 - 6:00 AM</span>
+                </div>
+                <div id="relic-display">
+                    <div class="relic-slot" title="Relic 1 (Undiscovered)"></div>
+                    <div class="relic-slot" title="Relic 2 (Undiscovered)"></div>
+                    <div class="relic-slot" title="Relic 3 (Undiscovered)"></div>
+                    <div class="relic-slot" title="Relic 4 (Undiscovered)"></div>
+                    <div class="relic-slot" title="Relic 5 (Undiscovered)"></div>
+                    <div class="relic-slot" title="Relic 6 (Undiscovered)"></div>
+                    <div class="relic-slot" title="Relic 7 (Undiscovered)"></div>
+                    <div class="relic-slot" title="Relic 8 (Undiscovered)"></div>
+                </div>
             </div>
         </div>
 
-        <!-- === MENU PAUSE === -->
         <div id="pause-menu">
              <div id="pause-content">
                  <h3>Game Dijeda</h3>
@@ -77,9 +74,7 @@
                  </ul>
              </div>
         </div>
-        <!-- ======================= -->
 
-        <!-- === LAYAR SAVE/LOAD BARU === -->
         <div id="saveload-menu">
             <div id="saveload-content">
                 <h3 id="saveload-title">Simpan/Muat Game</h3>
@@ -91,24 +86,86 @@
                 <div id="saveload-list-container">
                     <h4>Slot Tersimpan:</h4>
                     <ul id="save-slots-list">
-                        <!-- Slot save akan diisi oleh JS -->
                         <li class="no-saves">Belum ada game yang disimpan.</li>
                     </ul>
                 </div>
                 <button id="saveload-back-btn">Kembali</button>
             </div>
         </div>
-        <!-- ========================== -->
+
+        <div id="tictactoe-puzzle-overlay" class="puzzle-overlay">
+            <div id="tictactoe-puzzle" class="puzzle-content">
+                <h3>Pecahkan Puzzle Reruntuhan!</h3>
+                <p>Klik kotak yang benar agar X bisa mendapat hasil seri!</p>
+                <div id="tictactoe-board">
+                </div>
+            </div>
+        </div>
 
         <aside id="uiPanel">
             <h2>UI Panel</h2>
-            <!-- Popup content for each location -->
+            <div id="pads-container">
+                <div id="dpad-container" class="pad-container">
+                    <div class="pad-label">Movement</div>
+                    <button id="dpad-up" class="dpad-button">▲</button>
+                    <div class="dpad-middle-row">
+                        <button id="dpad-left" class="dpad-button">◀</button>
+                        <button id="dpad-right" class="dpad-button">▶</button>
+                    </div>
+                    <button id="dpad-down" class="dpad-button">▼</button>
+                </div>
+                
+                <div id="action-pad-container" class="pad-container">
+                    <div class="pad-label">Actions</div>
+                    <button id="dpad-e" class="dpad-button action-button">E</button>
+                    <div class="action-middle-row">
+                        <button id="dpad-m" class="dpad-button action-button">M</button>
+                        <button id="dpad-stats" class="dpad-button action-button">S</button>
+                        <button id="dpad-r" class="dpad-button action-button">R</button>
+                    </div>
+                    <button id="dpad-pause" class="dpad-button action-button">P</button>
+                </div>
+            </div>
+            
             <div id="location-panels">
-                <!-- Panels will be dynamically created here -->
             </div>
         </aside>
+
+        <div id="relic-discovery-popup" style="display: none;">
+            <div class="popup-content relic-discovery-content">
+                <h2>Relic Discovered!</h2>
+                <div class="relic-discovery-info">
+                    <div class="relic-image-container">
+                        <img id="discovered-relic-image" src="" alt="Discovered Relic" class="relic-image">
+                    </div>
+                    <h3 id="discovered-relic-name">Relic Name</h3>
+                    <p id="discovered-relic-description">Relic description will appear here.</p>
+                </div>
+                <button id="close-relic-discovery">Continue</button>
+            </div>
+        </div>
+
+        <div id="game-over-popup" style="display: none;">
+            <div class="popup-content">
+                <h2>Kematian Telah Menjemput</h2>
+                <p>Kegelapan telah menyelimuti perjalananmu, wahai penjelajah. Namun, takdir memberikanmu kesempatan untuk bangkit kembali.</p>
+                <button>Bangkit Kembali</button>
+            </div>
+        </div>
+        
+        <div id="game-completion-popup" style="display: none;">
+            <div class="popup-content completion-content">
+                <h2>Petualangan Berakhir!</h2>
+                <p>Selamat! Kamu telah berhasil mengumpulkan semua relik dan mengembalikannya ke tempat asalnya. Dunia Elendor akan selalu mengingat keberanianmu.</p>
+                <div class="completion-image-container">
+                </div>
+                <p class="completion-message">Terima kasih telah memainkan Elendor: Jejak Relik Nusantara!</p>
+                <button id="restart-game-btn">Main Lagi</button>
+            </div>
+        </div>
     </main>
 
+    <script src="js/playerData.js"></script>
     <script src="js/Arena.js"></script>
 </body>
-</html> 
+</html>

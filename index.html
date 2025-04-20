@@ -5,20 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PTI UTS</title>
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Loading Screen -->
     <div class="loading-screen">
-        <h1 class="loading-title">Ucup Exploring the Archipelago</h1>
+        <h1 class="loading-title">Elendor: Jejak Relik Nusantara</h1>
         <h2 class="loading-title2">Made by Group 9</h2>
         <div class="loading-line"></div>
         <div class="grow-line"></div>
-        <button id="audioToggleBtn">🔊 Enable Audio</button>
         <audio id="introAudio" src="assets/sound/temp.mp3"></audio>
     </div>
 
-    <!-- Navbar -->
     <div class="navbar">
         <div class="menu-container">
             <button class="menu-btn">☰</button>
@@ -29,28 +28,28 @@
         </div>
     </div>
 
-    <!-- Clock -->
     <div id="clock"></div>
 
-    <!-- Image background -->
     <div class="image-container">
         <img src="assets/Room.png">
     </div>
 
-    <!-- Rules Box (Initially Hidden) -->
     <div class="rules-box" id="rulesBox">
         <button class="close-btn">×</button>
         <ul>
             <li><b>• 1 minute in-game means 1 second in real life.</b></li>
-            <li><b>• There are 7 statuses that you need to see, namely: hunger, hydration, happiness, hygiene, and Health Point.</b></li>
-            <li><b>• If one of the status bars runs out (for example, hunger, hydration, or happiness), the health point will be reduced. Make sure to fill out all of the statuses!</li>
-            <li><b>• There are random events in the game, if you accomplish the event, you will get a reward.</b></li>
-            <li><b>• The game will be over if the Health Point (HP) is touching 0.</b></li>
-            <li><b>• Have fun!</li>
+            <li><b>• There are 7 statuses that you need to know, namely: HP, Hunger, Stamina, Attack, Speed, Armor, and Gold.</b></li>
+            <li><b>• HP can be reduced and restored on many occassions during the game, but HP touches 0, you will die and forced to reset your progress.</b></li>
+            <li><b>• Hunger will decrease overtime, keep your hunger bar high as otherwise it will start depeleting your HP.</b></li>
+            <li><b>• There are 3 types of movement to move in this game, namely: WASD keys, On-screen D-pad, and Touch the map.</b></li>
+            <li><b>• Press shift to run, but it will deplete your stamina bar.</b></li>
+            <li><b>• Press M to open the map to figure out where you are.</b></li>
+            <li><b>• Press E to interact with locations.</b></li>
+            <li><b>• Press esc to open the pause menu.</b></li>
+            <li><b>• The Actions D-pad is used for E(Interact), M(Map), R(Run), P(Pause), and S(Status).</b></li>
         </ul>
     </div>
 
-    <!-- Relic Box (Initially Hidden) -->
     <div class="Relic-box" id="relicBox">
         <button class="closed-btn">×</button>
     
@@ -109,7 +108,7 @@
             <img src="assets/relic/Parang.png" class="relic-image" />
         </div>
         <p><b>
-            The Parang is a traditional bladed tool and weapon widely used across Indonesia, Malaysia, and the Philippines. In Indonesia, it’s especially associated with rural and tribal 
+            The Parang is a traditional bladed tool and weapon widely used across Indonesia, Malaysia, and the Philippines. In Indonesia, it's especially associated with rural and tribal 
             communities, where it plays a vital role in daily life.
         </b></p>
         </div>
@@ -145,8 +144,8 @@
         </div>
     </div>
         
-    <!-- Character Selection Slider and Input/start button-->
      <div class="character-wrapper">
+        <h1 class="selection-title">Choose Your Hero</h1>
         <div class="character-selection">
             <button id="prevBtn">
                 <img src="assets/Prevbtn.png" alt="Previous" class="arrow-icon">    
@@ -161,6 +160,9 @@
                     </div>
                     <div class="character-slot">
                         <img src="assets/RangerPC/RangerIdle/idle5.png" class="character">
+                    </div>
+                    <div class="character-slot">
+                        <img src="assets/soldier/idle/idle5.png" class="character">
                     </div>
                 </div>
             </div>

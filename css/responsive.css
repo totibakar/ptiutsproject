@@ -1,0 +1,765 @@
+@media screen and (max-width: 1200px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    body {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    
+    #gameHeader h1 {
+        font-size: 1.8rem;
+    }
+    
+    #gameHeader h1::before,
+    #gameHeader h1::after {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    body {
+        font-size: 14px;
+    }
+    
+    #gameHeader h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .loading-title {
+        font-size: 1.8rem;
+    }
+    
+    .loading-title2 {
+        font-size: 1.2rem;
+    }
+    
+    .rules-box, .Relic-box {
+        width: 80%;
+        max-height: 70vh;
+    }
+    
+    .character-wrapper {
+        max-width: 90%;
+        padding: 15px;
+    }
+    
+    .selection-title {
+        font-size: 1.5rem;
+    }
+    
+    .character-selection {
+        flex-direction: column;
+        position: relative;
+    }
+    
+    .slider-container {
+        width: 100%;
+        max-width: 300px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .slider {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .character-slot {
+        width: 200px;
+        height: 250px;
+        margin: 0 auto;
+    }
+    
+    .character {
+        max-height: 240px;
+        max-width: 200px;
+    }
+    
+    #prevBtn, #nextBtn {
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+    }
+    
+    #prevBtn {
+        left: 0;
+    }
+    
+    #nextBtn {
+        right: 0;
+    }
+    
+    .arrow-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .relic-rows {
+        grid-template-columns: 1fr;
+    }
+    
+    .input-container {
+        width: 100%;
+    }
+    
+    .input-label {
+        font-size: 1rem;
+    }
+    
+    #playerName {
+        width: 100%;
+    }
+    
+    #startBtn {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .loading-title {
+        font-size: 1.5rem;
+    }
+    
+    .loading-title2 {
+        font-size: 1rem;
+    }
+    
+    .rules-box, .Relic-box {
+        width: 90%;
+        padding: 15px;
+    }
+    
+    .character-wrapper {
+        margin: 60px auto 20px;
+        padding: 10px;
+    }
+    
+    .selection-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .slider-container {
+        max-width: 250px;
+        position: relative;
+    }
+    
+    .character-slot {
+        width: 150px;
+        height: 180px;
+        border-width: 2px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .character {
+        max-height: 165px;
+        max-width: 140px;
+        position: relative;
+        top: 15px;
+        transform: translateY(0);
+    }
+    
+    .relic-content {
+        padding: 10px;
+    }
+    
+    .relic-image-container {
+        height: 120px;
+    }
+    
+    .relic-image {
+        max-height: 100px;
+    }
+    
+    #prevBtn, #nextBtn {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+        z-index: 3;
+    }
+    
+    #prevBtn {
+        left: -10px;
+    }
+    
+    #nextBtn {
+        right: -10px;
+    }
+    
+    .arrow-icon {
+        width: 15px;
+        height: 15px;
+    }
+}
+@media screen and (max-width: 1400px) {
+    #gameContainer {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    #game-display-wrapper {
+        margin: 0;
+    }
+    
+    #uiPanel {
+        position: relative;
+        width: 800px;
+        height: auto;
+        top: 0;
+        border-left: none;
+        border-top: 3px solid #8b4513;
+        margin: 0 auto;
+        padding: 15px;
+    }
+    
+    #hp-hunger-frame, #stamina-frame {
+        transform: scale(0.65);
+        transform-origin: left top;
+    }
+    
+    #player-gold, #game-time {
+        transform: scale(0.65);
+        transform-origin: right top;
+    }
+    
+    #relic-display {
+        transform: scale(0.65);
+        transform-origin: center bottom;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #game-display-wrapper, 
+    #gameArea,
+    #uiPanel {
+        width: 100%;
+        max-width: 800px;
+    }
+    
+    #gameArea {
+        height: 500px;
+    }
+    
+    canvas {
+        width: 100%;
+        height: 100%;
+    }
+    
+    #pads-container {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #gameContainer {
+        margin-top: 70px;
+        height: auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #gameHeader {
+        height: 50px;
+        padding: 1rem;
+    }
+    
+    #game-display-wrapper {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    #gameArea {
+        height: 400px;
+        padding: 10px;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    #uiPanel {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        padding: 10px;
+        margin: 20px auto;
+        border-radius: 5px;
+        border-left: none;
+        border-top: 3px solid #8b4513;
+        top: 0;
+        right: 0;
+    }
+    
+    #uiPanel h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    #hp-hunger-frame {
+        top: 10px;
+        left: 10px;
+        width: 150px;
+        transform: scale(0.65);
+        transform-origin: left top;
+    }
+    
+    #stamina-frame {
+        bottom: 10px;
+        left: 10px;
+        width: 250px;
+        transform: scale(0.65);
+        transform-origin: left bottom;
+    }
+    
+    #player-gold {
+        top: 10px;
+        right: 10px;
+        font-size: 12px;
+        padding: 4px 8px;
+        transform: scale(0.65);
+        transform-origin: right top;
+    }
+    
+    #game-time {
+        bottom: 10px;
+        right: 10px;
+        font-size: 12px;
+        padding: 4px 8px;
+        min-width: 120px;
+        transform: scale(0.65);
+        transform-origin: right bottom;
+    }
+    
+    #relic-display {
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.65);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: auto;
+        max-width: 200px;
+    }
+    
+    .relic-slot {
+        width: 25px;
+        height: 25px;
+        margin: 2px;
+    }
+    
+    #pause-content, 
+    #saveload-content,
+    .popup-content {
+        width: 90%;
+        max-width: 400px;
+        padding: 20px;
+    }
+    
+    #pause-options li,
+    #save-slots-list li {
+        padding: 10px;
+        margin-bottom: 8px;
+    }
+    
+    .location-panel {
+        width: 100%;
+    }
+    
+    #pads-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin: 0 auto 15px;
+    }
+    
+    .pad-container {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    #gameContainer {
+        margin-top: 60px;
+        padding: 8px;
+    }
+    
+    #gameHeader {
+        height: 45px;
+        padding: 0.8rem;
+    }
+    
+    #gameHeader h1 {
+        font-size: 1.2rem;
+    }
+    
+    #game-display-wrapper {
+        max-width: 100%;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+    
+    #gameArea {
+        height: 300px;
+        padding: 5px;
+        max-width: 100%;
+        margin-bottom: 0;
+    }
+    
+    #hp-hunger-frame {
+        width: 90px;
+        transform: scale(0.55);
+        transform-origin: left top;
+    }
+    
+    #stamina-frame {
+        width: 160px;
+        transform: scale(0.55);
+        transform-origin: left bottom;
+    }
+    
+    #player-gold, #game-time {
+        font-size: 10px;
+        padding: 3px 6px;
+        transform: scale(0.55);
+    }
+    
+    #uiPanel {
+        max-width: 100%;
+        padding: 8px;
+        margin: -5px auto 0;
+        font-size: 12px;
+        border-radius: 4px;
+        position: relative;
+        bottom: 0;
+    }
+    
+    #uiPanel h2 {
+        font-size: 0.9rem;
+        padding-bottom: 3px;
+        margin-bottom: 5px;
+    }
+    
+    #pads-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .pad-container {
+        width: 48%;
+        margin-bottom: 6px;
+        padding: 3px;
+    }
+    
+    .pad-label {
+        font-size: 0.7rem;
+        margin-bottom: 2px;
+    }
+    
+    .dpad-button {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+        margin: 1px;
+    }
+    
+    .dpad-middle-row, .action-middle-row {
+        gap: 1px;
+    }
+    
+    .location-panel {
+        padding: 8px;
+    }
+    
+    .location-panel h3 {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+    
+    .location-options li {
+        padding: 6px;
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+    }
+    
+    .dpad-button,
+    .location-options li,
+    .close-btn {
+        min-height: 32px;
+    }
+    
+    #pause-content, 
+    #saveload-content,
+    .popup-content {
+        padding: 12px;
+        max-width: 300px;
+    }
+    
+    .volume-slider {
+        margin-bottom: 8px;
+    }
+    
+    .volume-slider label {
+        font-size: 12px;
+    }
+    
+    #pause-options li,
+    #save-slots-list li {
+        padding: 8px;
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+    
+    #relic-discovery-popup .popup-content,
+    #game-over-popup .popup-content,
+    #game-completion-popup .popup-content {
+        width: 95%;
+        padding: 12px;
+    }
+    
+    .relic-discovery-info {
+        flex-direction: column;
+    }
+    
+    .relic-image-container {
+        margin-right: 0;
+        margin-bottom: 8px;
+        height: 100px;
+    }
+    
+    .relic-discovery-content h2,
+    .completion-content h2 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+    
+    .relic-discovery-content p,
+    .completion-content p {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+    
+    #discovered-relic-name {
+        font-size: 1rem;
+    }
+    
+    #close-relic-discovery,
+    #restart-game-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    #relic-display {
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.5);
+        display: flex;
+        justify-content: center;
+        width: 90%;
+        max-width: 280px;
+    }
+    
+    .relic-slot {
+        width: 18px;
+        height: 18px;
+        margin: 1px;
+        border-width: 1px;
+    }
+    
+    #uiPanel .character-stats {
+        transform: scale(0.95);
+        transform-origin: center top;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+    
+    #uiPanel h3 {
+        font-size: 14px;
+        color: #f4cd74;
+        margin: 5px 0;
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    #uiPanel .equipment-section {
+        margin-top: 8px;
+        padding: 3px 5px;
+    }
+    
+    #uiPanel .equipment-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3px;
+        font-size: 12px;
+        padding: 2px 5px;
+    }
+    
+    #uiPanel .equipment-label {
+        font-size: 12px;
+        color: #f4cd74;
+        font-weight: bold;
+    }
+    
+    #uiPanel .equipment-value {
+        font-size: 12px;
+        font-style: italic;
+        opacity: 0.9;
+    }
+    
+    #uiPanel {
+        max-width: 100%;
+        padding: 8px;
+        margin: -5px auto 0;
+        font-size: 12px;
+        border-radius: 4px;
+        position: relative;
+        bottom: 0;
+    }
+    
+    #uiPanel .class-display {
+        font-size: 15px;
+        margin: 5px 0;
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    #uiPanel .progress-bar {
+        height: 14px;
+        margin: 4px 0;
+        max-width: 100%;
+        border-radius: 3px;
+    }
+    
+    #uiPanel .stat-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 4px;
+        padding: 0 5px;
+    }
+    
+    #uiPanel .hp-bar, 
+    #uiPanel .hunger-bar, 
+    #uiPanel .stamina-bar {
+        height: 12px;
+        max-width: 65%;
+        margin-right: 10px;
+    }
+    
+    #uiPanel .stat-label {
+        font-size: 12px;
+        margin-right: 8px;
+        min-width: 55px;
+        text-align: left;
+    }
+    
+    #uiPanel .stat-value {
+        font-size: 12px;
+        min-width: 50px;
+        text-align: right;
+        font-weight: bold;
+    }
+    
+    #uiPanel .numeric-stat {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 3px;
+        padding: 2px 5px;
+    }
+    
+    #uiPanel .special-trait {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        padding: 6px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+    }
+    
+    #uiPanel .special-trait h3 {
+        font-size: 14px;
+        margin-bottom: 4px;
+        text-align: center;
+    }
+    
+    #uiPanel .special-trait p {
+        font-size: 12px;
+        line-height: 1.3;
+        text-align: center;
+    }
+    
+    #uiPanel .player-display {
+        width: 80px;
+        height: 80px;
+        margin-right: 5px;
+    }
+    
+    #uiPanel .content-section {
+        margin-bottom: 5px;
+    }
+    
+    #uiPanel h2.section-title {
+        font-size: 14px;
+        margin-bottom: 3px;
+    }
+    
+    #uiPanel .character-portrait {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 5px;
+    }
+    
+    #uiPanel .numeric-stat {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2px;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .dpad-button,
+    #pause-options li,
+    #save-slots-list li,
+    .location-options li,
+    .close-btn,
+    button {
+        min-height: 44px;
+    }
+}
